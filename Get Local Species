@@ -1,0 +1,40 @@
+# PYTHON 
+
+
+## setup
+
+import selenium
+from selenium import webdriver
+import datetime as dt 
+import string
+
+path_to_chromedriver = '/Users/myname/Desktop/chromedriver' 
+browser = webdriver.Chrome(executable_path = path_to_chromedriver)
+url = 'https://ebird.org/places'
+browser.get(url)
+
+## type into the form
+
+browser.find_element_by_id('findReg').clear()
+location = 'District of Columbia'               ## <------ enter your desired location here
+browser.find_element_by_id('findReg').send_keys(location)
+
+## select from the results dropdown list
+
+browser.find_element_by_xpath('/html/body/div[5]/div/div[2]/menu/li[1]').click()
+tab_data = browser.find_element_by_id("sightingsTable")
+list_rows = [[cell.text for cell in row.find_elements_by_tag_name('td')]
+             for row in tab_data.find_elements_by_tag_name('tr')]
+list_rows = list_rows[1::2]
+
+## species seen today
+
+today = dt.date.today() - dt.timedelta(1)
+today = today.strftime("%d %b %Y")
+today = unicode(today)
+species_today = [str(t[1]) for t in list_rows if t[3] == today]
+
+
+## last 100 species seen
+
+species_100 = [str(t[1]) for t in list_rows[0:99]]
