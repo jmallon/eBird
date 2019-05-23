@@ -1,7 +1,7 @@
 # eBird life and year targets    
-## This function expands on the [rebird](https://cran.r-project.org/web/packages/rebird/index.html) R package by removing birds already in your year and life lists.
-### Also removes duplicate observations for readibility
-
+This function expands on the [rebird](https://cran.r-project.org/web/packages/rebird/index.html) R package by removing birds already in your year and life lists.
+Also removes duplicate observations for readibility
+***
 ### required packages
 ```
 library(readr)    
@@ -32,5 +32,5 @@ yearlist <- read_csv("myfilepath/ebird_US_year_list.csv")
                 max =500, includeProvisional = TRUE, 
                 hotspot = FALSE, back = 3)    
 ```
-
+***
 for documentation, see ?ebirdgeo
